@@ -16,7 +16,10 @@ module.exports = {
             //     text: 'Nacox1.x', link: '/nacos1/'
             // },
             { 
-                text: 'Nacox2.x', link: '/nacos2/'
+                text: 'Nacos2.x源码分析', link: '/nacos2/'
+            },
+            {
+                text: 'Nacos代码设计', link: '/design/'
             },
             { 
                 text: '常见问题', link: '/question/'
@@ -54,14 +57,26 @@ module.exports = {
                 // ],
                  "/nacos2/":[
                         {
-                        title: 'Nacos2.1.0',
+                        title: '基于Nacos2.1.0',
                         collapsable: false, // 不折叠
                         children: [{
-                          title: "1.Nacos源码开篇",
+                          title: "第1节.Nacos源码开篇及环境搭建",
                            collapsable: true,
-                          path: "/nacos2/01-Nacos源码开篇/Nacos源码分析开篇.md"                        }
+                          path: "/nacos2/第1节.Nacos源码开篇及环境搭建/第1节.Nacos源码开篇及环境搭建.md"                        }
 
                       ]
+                    }
+                ],
+                "/design/":[
+                    {
+                        title: 'Nacos代码设计',
+                        collapsable: false, // 不折叠
+                        children: [{
+                            title: "第1节.Nacos中的Optional的使用",
+                            collapsable: true,
+                            path: "/design/第1节.Nacos中的Optional的使用.md"                        }
+
+                        ]
                     }
                 ],
                 "/question/":[
@@ -70,9 +85,9 @@ module.exports = {
                         path: '/question/',
                         collapsable: false, // 不折叠
                          children: [{
-                          title: "01",
-                          path: "/nacos1/01.md" ,
-                          collapsable: false
+                          // title: "01",
+                          // path: "/nacos1/01.md" ,
+                          // collapsable: false
                         }
 
                       ]
