@@ -74,7 +74,12 @@ module.exports = {
                         children: [{
                             title: "第1节.Nacos中的Optional的使用",
                             collapsable: true,
-                            path: "/design/第1节.Nacos中的Optional的使用.md"                        }
+                            path: "/design/第1节.Nacos中的Optional的使用.md"
+                            }, {
+                                title: "第2节.Nacos中的CAS的使用",
+                                collapsable: true,
+                                path: "/design/第2节.Nacos中的CAS的使用.md"
+                            }
 
                         ]
                     }
