@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>基本使用 | Nacos Guide</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="微服务核心组件Nacos，值得大家学习和研究">
+    
+    <link rel="preload" href="/nacos-guide/assets/css/0.styles.8ec0511f.css" as="style"><link rel="preload" href="/nacos-guide/assets/js/app.35c98397.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/2.e7ffb21b.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/12.73d19e9e.js" as="script"><link rel="prefetch" href="/nacos-guide/assets/js/10.3fc6e646.js"><link rel="prefetch" href="/nacos-guide/assets/js/11.6e475afc.js"><link rel="prefetch" href="/nacos-guide/assets/js/13.b983c0d7.js"><link rel="prefetch" href="/nacos-guide/assets/js/14.6c8b92a3.js"><link rel="prefetch" href="/nacos-guide/assets/js/15.a3b04244.js"><link rel="prefetch" href="/nacos-guide/assets/js/16.a9d62930.js"><link rel="prefetch" href="/nacos-guide/assets/js/17.897b5915.js"><link rel="prefetch" href="/nacos-guide/assets/js/18.28b352d2.js"><link rel="prefetch" href="/nacos-guide/assets/js/19.16a7844b.js"><link rel="prefetch" href="/nacos-guide/assets/js/20.278e6a6d.js"><link rel="prefetch" href="/nacos-guide/assets/js/21.168ff3e2.js"><link rel="prefetch" href="/nacos-guide/assets/js/22.8e974dfd.js"><link rel="prefetch" href="/nacos-guide/assets/js/3.d1f6cb33.js"><link rel="prefetch" href="/nacos-guide/assets/js/4.4042862f.js"><link rel="prefetch" href="/nacos-guide/assets/js/5.eabe2e69.js"><link rel="prefetch" href="/nacos-guide/assets/js/6.f1e6b323.js"><link rel="prefetch" href="/nacos-guide/assets/js/7.e7c1f360.js"><link rel="prefetch" href="/nacos-guide/assets/js/8.e9c0e684.js"><link rel="prefetch" href="/nacos-guide/assets/js/9.65ece48b.js">
+    <link rel="stylesheet" href="/nacos-guide/assets/css/0.styles.8ec0511f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nacos-guide/" class="home-link router-link-active"><!----> <span class="site-name">Nacos Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2.x源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2.x源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>基本使用</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/nacos-guide/basic/01-Nacos表结构说明/第1节.Nacos数据库表结构说明.html" class="sidebar-link">第1节.Nacos数据库表结构说明</a></li><li><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html" class="sidebar-link">第2节.Nacos启动脚本文件说明</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="基本使用"><a href="#基本使用" class="header-anchor">#</a> 基本使用</h1> <p>这里分享Nacos组件的基本使用说明</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/5/2022, 10:56:14 PM</span></div></footer> <!----> </main></div><div class="global-ui"></div></div>
+    <script src="/nacos-guide/assets/js/app.35c98397.js" defer></script><script src="/nacos-guide/assets/js/2.e7ffb21b.js" defer></script><script src="/nacos-guide/assets/js/12.73d19e9e.js" defer></script>
+  </body>
+</html>

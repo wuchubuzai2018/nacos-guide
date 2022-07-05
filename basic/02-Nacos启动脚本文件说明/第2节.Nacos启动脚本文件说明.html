@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第2节.Nacos启动脚本文件说明 | Nacos Guide</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="微服务核心组件Nacos，值得大家学习和研究">
+    
+    <link rel="preload" href="/nacos-guide/assets/css/0.styles.8ec0511f.css" as="style"><link rel="preload" href="/nacos-guide/assets/js/app.35c98397.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/2.e7ffb21b.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/11.6e475afc.js" as="script"><link rel="prefetch" href="/nacos-guide/assets/js/10.3fc6e646.js"><link rel="prefetch" href="/nacos-guide/assets/js/12.73d19e9e.js"><link rel="prefetch" href="/nacos-guide/assets/js/13.b983c0d7.js"><link rel="prefetch" href="/nacos-guide/assets/js/14.6c8b92a3.js"><link rel="prefetch" href="/nacos-guide/assets/js/15.a3b04244.js"><link rel="prefetch" href="/nacos-guide/assets/js/16.a9d62930.js"><link rel="prefetch" href="/nacos-guide/assets/js/17.897b5915.js"><link rel="prefetch" href="/nacos-guide/assets/js/18.28b352d2.js"><link rel="prefetch" href="/nacos-guide/assets/js/19.16a7844b.js"><link rel="prefetch" href="/nacos-guide/assets/js/20.278e6a6d.js"><link rel="prefetch" href="/nacos-guide/assets/js/21.168ff3e2.js"><link rel="prefetch" href="/nacos-guide/assets/js/22.8e974dfd.js"><link rel="prefetch" href="/nacos-guide/assets/js/3.d1f6cb33.js"><link rel="prefetch" href="/nacos-guide/assets/js/4.4042862f.js"><link rel="prefetch" href="/nacos-guide/assets/js/5.eabe2e69.js"><link rel="prefetch" href="/nacos-guide/assets/js/6.f1e6b323.js"><link rel="prefetch" href="/nacos-guide/assets/js/7.e7c1f360.js"><link rel="prefetch" href="/nacos-guide/assets/js/8.e9c0e684.js"><link rel="prefetch" href="/nacos-guide/assets/js/9.65ece48b.js">
+    <link rel="stylesheet" href="/nacos-guide/assets/css/0.styles.8ec0511f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nacos-guide/" class="home-link router-link-active"><!----> <span class="site-name">Nacos Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2.x源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2.x源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>基本使用</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/nacos-guide/basic/01-Nacos表结构说明/第1节.Nacos数据库表结构说明.html" class="sidebar-link">第1节.Nacos数据库表结构说明</a></li><li><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html" class="active sidebar-link">第2节.Nacos启动脚本文件说明</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html#_1-脚本支持的外部参数" class="sidebar-link">1.脚本支持的外部参数</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html#_2-脚本支持的基本功能" class="sidebar-link">2.脚本支持的基本功能</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html#_3-脚本注释说明" class="sidebar-link">3.脚本注释说明</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第2节-nacos启动脚本文件说明"><a href="#第2节-nacos启动脚本文件说明" class="header-anchor">#</a> 第2节.Nacos启动脚本文件说明</h1> <p>Nacos本质是一个基于SpringBoot开发的应用程序，所以它的启动脚本对于我们来说也是很有学习意义的，这里以Linux的脚本的为例进行说明。</p> <p>脚本的最终目的就是拼接一个java启动命令，并进行执行。</p> <h2 id="_1-脚本支持的外部参数"><a href="#_1-脚本支持的外部参数" class="header-anchor">#</a> 1.脚本支持的外部参数</h2> <p>脚本具有几个默认的参数：</p> <p>-m参数：指定启动模式，单机(standalone)还是集群(cluster)</p> <p>-f参数：指定功能模式，配置中心还是注册中心</p> <p>-s参数：指定服务JAR包名称(nacos-server)</p> <p>-c参数：指定集群成员列表，最终会传给-Dnacos.member.list命令行属性</p> <p>-p参数：指定存储模式，内嵌数据库还是外置数据库</p> <p>当知道了这几个参数以后，脚本大概的逻辑也就基本清楚了。</p> <h2 id="_2-脚本支持的基本功能"><a href="#_2-脚本支持的基本功能" class="header-anchor">#</a> 2.脚本支持的基本功能</h2> <p>1、检查JAVA_HOME环境变量是否存在</p> <p>2、获得5个参数的默认值</p> <p>3、设置内存参数设置，单机默认512M，非单机2G</p> <p>4、设置开放功能模式、集群成员列表参数</p> <p>5、设置GC启动参数</p> <p>6、设置nacos主目录、日志文件、spring文件等</p> <p>7、nohup后台运行nacos服务</p> <h2 id="_3-脚本注释说明"><a href="#_3-脚本注释说明" class="header-anchor">#</a> 3.脚本注释说明</h2> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token shebang important">#!/bin/bash</span>
+
+<span class="token comment"># Copyright 1999-2018 Alibaba Group Holding Ltd.</span>
+<span class="token comment"># Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);</span>
+<span class="token comment"># you may not use this file except in compliance with the License.</span>
+<span class="token comment"># You may obtain a copy of the License at</span>
+
+<span class="token comment">#      http://www.apache.org/licenses/LICENSE-2.0</span>
+<span class="token comment">#</span>
+<span class="token comment"># Unless required by applicable law or agreed to in writing, software</span>
+<span class="token comment"># distributed under the License is distributed on an &quot;AS IS&quot; BASIS,</span>
+<span class="token comment"># WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span>
+<span class="token comment"># See the License for the specific language governing permissions and</span>
+<span class="token comment"># limitations under the License.</span>
+
+<span class="token assign-left variable">cygwin</span><span class="token operator">=</span>false
+<span class="token assign-left variable">darwin</span><span class="token operator">=</span>false
+<span class="token assign-left variable">os400</span><span class="token operator">=</span>false
+<span class="token keyword">case</span> <span class="token string">&quot;<span class="token variable"><span class="token variable">`</span><span class="token function">uname</span><span class="token variable">`</span></span>&quot;</span> <span class="token keyword">in</span>
+CYGWIN*<span class="token punctuation">)</span> <span class="token assign-left variable">cygwin</span><span class="token operator">=</span>true<span class="token punctuation">;</span><span class="token punctuation">;</span>
+Darwin*<span class="token punctuation">)</span> <span class="token assign-left variable">darwin</span><span class="token operator">=</span>true<span class="token punctuation">;</span><span class="token punctuation">;</span>
+OS400*<span class="token punctuation">)</span> <span class="token assign-left variable">os400</span><span class="token operator">=</span>true<span class="token punctuation">;</span><span class="token punctuation">;</span>
+<span class="token keyword">esac</span>
+<span class="token comment"># 定义退出函数</span>
+<span class="token function-name function">error_exit</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;ERROR: <span class="token variable">$1</span> !!&quot;</span>
+    <span class="token builtin class-name">exit</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span class="token comment"># 各种位置取出JAVA_HOME环境变量</span>
+<span class="token punctuation">[</span> <span class="token operator">!</span> -e <span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>/bin/java&quot;</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span><span class="token environment constant">$HOME</span>/jdk/java
+<span class="token punctuation">[</span> <span class="token operator">!</span> -e <span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>/bin/java&quot;</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/usr/java
+<span class="token punctuation">[</span> <span class="token operator">!</span> -e <span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>/bin/java&quot;</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/opt/taobao/java
+<span class="token punctuation">[</span> <span class="token operator">!</span> -e <span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>/bin/java&quot;</span> <span class="token punctuation">]</span> <span class="token operator">&amp;&amp;</span> <span class="token builtin class-name">unset</span> JAVA_HOME
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token keyword">if</span> <span class="token variable">$darwin</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> -x <span class="token string">'/usr/libexec/java_home'</span> <span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span>/usr/libexec/java_home<span class="token variable">`</span></span>
+
+    <span class="token keyword">elif</span> <span class="token punctuation">[</span> -d <span class="token string">&quot;/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span><span class="token string">&quot;/System/Library/Frameworks/JavaVM.framework/Versions/CurrentJDK/Home&quot;</span>
+    <span class="token keyword">fi</span>
+  <span class="token keyword">else</span>
+    <span class="token assign-left variable">JAVA_PATH</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">dirname</span> <span class="token punctuation">$(</span>readlink -f <span class="token punctuation">$(</span>which javac<span class="token punctuation">))</span><span class="token variable">`</span></span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token string">&quot;x<span class="token variable">$JAVA_PATH</span>&quot;</span> <span class="token operator">!=</span> <span class="token string">&quot;x&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token function">dirname</span> $JAVA_PATH <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span>/dev/null<span class="token variable">`</span></span>
+    <span class="token keyword">fi</span>
+  <span class="token keyword">fi</span>
+  <span class="token keyword">if</span> <span class="token punctuation">[</span> -z <span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        error_exit <span class="token string">&quot;Please set the JAVA_HOME variable in your environment, We need java(x64)! jdk8 or later is better!&quot;</span>
+  <span class="token keyword">fi</span>
+<span class="token keyword">fi</span>
+<span class="token comment"># 脚本参数的默认值</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">SERVER</span><span class="token operator">=</span><span class="token string">&quot;nacos-server&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MODE</span><span class="token operator">=</span><span class="token string">&quot;cluster&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">FUNCTION_MODE</span><span class="token operator">=</span><span class="token string">&quot;all&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">MEMBER_LIST</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">EMBEDDED_STORAGE</span><span class="token operator">=</span><span class="token string">&quot;&quot;</span>
+<span class="token keyword">while</span> <span class="token builtin class-name">getopts</span> <span class="token string">&quot;:m:f:s:c:p:&quot;</span> opt
+<span class="token keyword">do</span>
+    <span class="token keyword">case</span> <span class="token variable">$opt</span> <span class="token keyword">in</span>
+        m<span class="token punctuation">)</span>
+            <span class="token assign-left variable">MODE</span><span class="token operator">=</span><span class="token variable">$OPTARG</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+        f<span class="token punctuation">)</span>
+            <span class="token assign-left variable">FUNCTION_MODE</span><span class="token operator">=</span><span class="token variable">$OPTARG</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+        s<span class="token punctuation">)</span>
+            <span class="token assign-left variable">SERVER</span><span class="token operator">=</span><span class="token variable">$OPTARG</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+        c<span class="token punctuation">)</span>
+            <span class="token assign-left variable">MEMBER_LIST</span><span class="token operator">=</span><span class="token variable">$OPTARG</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+        p<span class="token punctuation">)</span>
+            <span class="token assign-left variable">EMBEDDED_STORAGE</span><span class="token operator">=</span><span class="token variable">$OPTARG</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+        ?<span class="token punctuation">)</span>
+        <span class="token builtin class-name">echo</span> <span class="token string">&quot;Unknown parameter&quot;</span>
+        <span class="token builtin class-name">exit</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token punctuation">;</span>
+    <span class="token keyword">esac</span>
+<span class="token keyword">done</span>
+
+<span class="token builtin class-name">export</span> JAVA_HOME
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">JAVA</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">$JAVA_HOME</span>/bin/java&quot;</span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">BASE_DIR</span><span class="token operator">=</span><span class="token variable"><span class="token variable">`</span><span class="token builtin class-name">cd</span> <span class="token punctuation">$(</span>dirname $0<span class="token punctuation">)</span>/<span class="token punctuation">..</span><span class="token punctuation">;</span> <span class="token builtin class-name">pwd</span><span class="token variable">`</span></span>
+<span class="token builtin class-name">export</span> <span class="token assign-left variable">CUSTOM_SEARCH_LOCATIONS</span><span class="token operator">=</span>file:<span class="token variable">${BASE_DIR}</span>/conf/
+
+<span class="token comment">#===========================================================================================</span>
+<span class="token comment"># JVM Configuration</span>
+<span class="token comment">#===========================================================================================</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${MODE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;standalone&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+		<span class="token comment"># 单机模式默认占用512m内存</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Xms512m -Xmx512m -Xmn256m&quot;</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dnacos.standalone=true&quot;</span>
+<span class="token keyword">else</span>
+    <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${EMBEDDED_STORAGE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;embedded&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+        <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -DembeddedStorage=true&quot;</span>
+    <span class="token keyword">fi</span>
+    <span class="token comment"># 非单机模式占用2G内存</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -server -Xms2g -Xmx2g -Xmn1g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="token variable">${BASE_DIR}</span>/logs/java_heapdump.hprof&quot;</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -XX:-UseLargePages&quot;</span>
+
+<span class="token keyword">fi</span>
+<span class="token comment"># 设置功能模式</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${FUNCTION_MODE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;config&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dnacos.functionMode=config&quot;</span>
+<span class="token keyword">elif</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${FUNCTION_MODE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;naming&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dnacos.functionMode=naming&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token comment"># 设置集群成员列表</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dnacos.member.list=<span class="token variable">${MEMBER_LIST}</span>&quot;</span>
+
+<span class="token comment"># 设置GC启动参数</span>
+<span class="token assign-left variable">JAVA_MAJOR_VERSION</span><span class="token operator">=</span><span class="token variable"><span class="token variable">$(</span>$JAVA -version <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">|</span> <span class="token function">sed</span> -E -n <span class="token string">'s/.* version &quot;([0-9]*).*$/\1/p'</span><span class="token variable">)</span></span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$JAVA_MAJOR_VERSION</span>&quot;</span> -ge <span class="token string">&quot;9&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span> <span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Xlog:gc*:file=<span class="token variable">${BASE_DIR}</span>/logs/nacos_gc.log:time,tags:filecount=10,filesize=102400&quot;</span>
+<span class="token keyword">else</span>
+  <span class="token assign-left variable">JAVA_OPT_EXT_FIX</span><span class="token operator">=</span><span class="token string">&quot;-Djava.ext.dirs=<span class="token variable">${JAVA_HOME}</span>/jre/lib/ext:<span class="token variable">${JAVA_HOME}</span>/lib/ext&quot;</span>
+  <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Xloggc:<span class="token variable">${BASE_DIR}</span>/logs/nacos_gc.log -verbose:gc -XX:+PrintGCDetails -XX:+PrintGCDateStamps -XX:+PrintGCTimeStamps -XX:+UseGCLogFileRotation -XX:NumberOfGCLogFiles=10 -XX:GCLogFileSize=100M&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token comment"># 设置插件目录、nacos主目录、日志文件位置、spring附加配置文件参数</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dloader.path=<span class="token variable">${BASE_DIR}</span>/plugins/health,<span class="token variable">${BASE_DIR}</span>/plugins/cmdb,<span class="token variable">${BASE_DIR}</span>/plugins/selector&quot;</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dnacos.home=<span class="token variable">${BASE_DIR}</span>&quot;</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -jar <span class="token variable">${BASE_DIR}</span>/target/<span class="token variable">${SERVER}</span>.jar&quot;</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> <span class="token variable">${JAVA_OPT_EXT}</span>&quot;</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> --spring.config.additional-location=<span class="token variable">${CUSTOM_SEARCH_LOCATIONS}</span>&quot;</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> --logging.config=<span class="token variable">${BASE_DIR}</span>/conf/nacos-logback.xml&quot;</span>
+<span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> --server.max-http-header-size=524288&quot;</span>
+<span class="token comment"># 如果日志目录不存在创建日志目录</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -d <span class="token string">&quot;<span class="token variable">${BASE_DIR}</span>/logs&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token function">mkdir</span> <span class="token variable">${BASE_DIR}</span>/logs
+<span class="token keyword">fi</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$JAVA</span> <span class="token variable">$JAVA_OPT_EXT_FIX</span> <span class="token variable">${JAVA_OPT}</span>&quot;</span>
+<span class="token comment"># 输出启动模式日志</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${MODE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;standalone&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;nacos is starting with standalone&quot;</span>
+<span class="token keyword">else</span>
+    <span class="token builtin class-name">echo</span> <span class="token string">&quot;nacos is starting with cluster&quot;</span>
+<span class="token keyword">fi</span>
+
+<span class="token comment"># check the start.out log output file</span>
+<span class="token keyword">if</span> <span class="token punctuation">[</span> <span class="token operator">!</span> -f <span class="token string">&quot;<span class="token variable">${BASE_DIR}</span>/logs/start.out&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+  <span class="token function">touch</span> <span class="token string">&quot;<span class="token variable">${BASE_DIR}</span>/logs/start.out&quot;</span>
+<span class="token keyword">fi</span>
+<span class="token comment"># start</span>
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;<span class="token variable">$JAVA</span> <span class="token variable">$JAVA_OPT_EXT_FIX</span> <span class="token variable">${JAVA_OPT}</span>&quot;</span> <span class="token operator">&gt;</span> <span class="token variable">${BASE_DIR}</span>/logs/start.out <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+
+<span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+	<span class="token comment">#后台运行模式调用java命令</span>
+  <span class="token function">nohup</span> <span class="token string">&quot;<span class="token variable">$JAVA</span>&quot;</span> <span class="token variable">${JAVA_OPT}</span> nacos.nacos <span class="token operator">&gt;&gt;</span> <span class="token variable">${BASE_DIR}</span>/logs/start.out <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+<span class="token keyword">else</span>
+	<span class="token comment">#后台运行模式调用java命令</span>
+  <span class="token function">nohup</span> <span class="token string">&quot;<span class="token variable">$JAVA</span>&quot;</span> <span class="token string">&quot;<span class="token variable">$JAVA_OPT_EXT_FIX</span>&quot;</span> <span class="token variable">${JAVA_OPT}</span> nacos.nacos <span class="token operator">&gt;&gt;</span> <span class="token variable">${BASE_DIR}</span>/logs/start.out <span class="token operator"><span class="token file-descriptor important">2</span>&gt;</span><span class="token file-descriptor important">&amp;1</span> <span class="token operator">&amp;</span>
+<span class="token keyword">fi</span>
+
+<span class="token builtin class-name">echo</span> <span class="token string">&quot;nacos is starting，you can check the <span class="token variable">${BASE_DIR}</span>/logs/start.out&quot;</span>
+</code></pre></div></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">7/5/2022, 10:56:14 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/nacos-guide/basic/01-Nacos表结构说明/第1节.Nacos数据库表结构说明.html" class="prev">
+        第1节.Nacos数据库表结构说明
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nacos-guide/assets/js/app.35c98397.js" defer></script><script src="/nacos-guide/assets/js/2.e7ffb21b.js" defer></script><script src="/nacos-guide/assets/js/11.6e475afc.js" defer></script>
+  </body>
+</html>
