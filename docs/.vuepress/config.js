@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Nacos Guide',
-  description: '微服务Nacos组件，值得学习和研究',
+  description: '微服务核心组件Nacos，值得大家学习和研究',
   locales: {
     '/': {
       lang: 'zh-CN'
@@ -12,9 +12,9 @@ module.exports = {
     lastUpdated: 'Last Updated',
         nav: [
             { text: '导读', link: '/guide/list/01.md' },
-            // { 
-            //     text: 'Nacox1.x', link: '/nacos1/'
-            // },
+            {
+                text: '基本使用', link: '/basic/'
+            },
             { 
                 text: 'Nacos2.x源码分析', link: '/nacos2/'
             },
@@ -41,20 +41,23 @@ module.exports = {
                       ]
                     }
                 ],
-                // "/nacos1/":[
-                //         {
-                //         title: 'Nacos1.4.3',
-                //         path: '/nacos1/',
-                //         collapsable: false, // 不折叠
-                //         children: [{
-                //           title: "01",
-                //           path: "/nacos1/01.md" ,
-                //           collapsable: false
-                //         }
+                "/basic/":[
+                        {
+                        title: '基本使用',
+                        collapsable: false, // 不折叠
+                        children: [{
+                          title: "第1节.Nacos数据库表结构说明",
+                          path: "/basic/01-Nacos表结构说明/第1节.Nacos数据库表结构说明.md" ,
+                          collapsable: false
+                        },{
+                            title: "第2节.Nacos启动脚本文件说明",
+                            path: "/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.md" ,
+                            collapsable: false
+                        }
 
-                //       ]
-                //     }
-                // ],
+                      ]
+                    }
+                ],
                  "/nacos2/":[
                         {
                         title: '基于Nacos2.1.0',
