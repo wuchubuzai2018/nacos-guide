@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第5节.Nacos注册中心AP模式的数据一致性说明 | Nacos Guide</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="分享微服务组件Nacos，学习其源码与思想">
+    
+    <link rel="preload" href="/nacos-guide/assets/css/0.styles.315a301c.css" as="style"><link rel="preload" href="/nacos-guide/assets/js/app.66cd9b59.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/2.fd0c06d4.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/15.7bf50d6e.js" as="script"><link rel="prefetch" href="/nacos-guide/assets/js/10.742b4de3.js"><link rel="prefetch" href="/nacos-guide/assets/js/11.e5dec651.js"><link rel="prefetch" href="/nacos-guide/assets/js/12.7d0e689a.js"><link rel="prefetch" href="/nacos-guide/assets/js/13.45ac1958.js"><link rel="prefetch" href="/nacos-guide/assets/js/14.6b452d3d.js"><link rel="prefetch" href="/nacos-guide/assets/js/16.813f3080.js"><link rel="prefetch" href="/nacos-guide/assets/js/17.ec283283.js"><link rel="prefetch" href="/nacos-guide/assets/js/18.357bed57.js"><link rel="prefetch" href="/nacos-guide/assets/js/19.a656dd30.js"><link rel="prefetch" href="/nacos-guide/assets/js/20.f382b739.js"><link rel="prefetch" href="/nacos-guide/assets/js/21.355bcc58.js"><link rel="prefetch" href="/nacos-guide/assets/js/22.6a900892.js"><link rel="prefetch" href="/nacos-guide/assets/js/23.8c89a62d.js"><link rel="prefetch" href="/nacos-guide/assets/js/24.550fdc1f.js"><link rel="prefetch" href="/nacos-guide/assets/js/25.c0db29f8.js"><link rel="prefetch" href="/nacos-guide/assets/js/26.800ecd55.js"><link rel="prefetch" href="/nacos-guide/assets/js/27.64e0bb30.js"><link rel="prefetch" href="/nacos-guide/assets/js/28.6f1beecb.js"><link rel="prefetch" href="/nacos-guide/assets/js/29.7d1e866d.js"><link rel="prefetch" href="/nacos-guide/assets/js/3.c3936cdc.js"><link rel="prefetch" href="/nacos-guide/assets/js/4.810db986.js"><link rel="prefetch" href="/nacos-guide/assets/js/5.c131b314.js"><link rel="prefetch" href="/nacos-guide/assets/js/6.af062ec9.js"><link rel="prefetch" href="/nacos-guide/assets/js/7.de312d58.js"><link rel="prefetch" href="/nacos-guide/assets/js/8.6c4ec18c.js"><link rel="prefetch" href="/nacos-guide/assets/js/9.4916569b.js">
+    <link rel="stylesheet" href="/nacos-guide/assets/css/0.styles.315a301c.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nacos-guide/" class="home-link router-link-active"><!----> <span class="site-name">Nacos Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2.x源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2.x源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>基本使用</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/nacos-guide/basic/01-Nacos表结构说明/第1节.Nacos数据库表结构说明.html" class="sidebar-link">第1节.Nacos数据库表结构说明</a></li><li><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html" class="sidebar-link">第2节.Nacos启动脚本文件说明</a></li><li><a href="/nacos-guide/basic/03-Nacos命名空间说明/第3节.Nacos命名空间说明.html" class="sidebar-link">第3节.Nacos命名空间说明</a></li><li><a href="/nacos-guide/basic/04-Nacos的临时实例与持久化实例/第4节.Nacos临时实例与持久化实例.html" class="sidebar-link">第4节.Nacos临时实例与持久化实例</a></li><li><a href="/nacos-guide/basic/05-Nacos注册中心AP模式的数据一致性/第5节.Nacos注册中心AP模式的数据一致性.html" class="active sidebar-link">第5节.Nacos注册中心AP模式的数据一致性</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第5节-nacos注册中心ap模式的数据一致性说明"><a href="#第5节-nacos注册中心ap模式的数据一致性说明" class="header-anchor">#</a> 第5节.Nacos注册中心AP模式的数据一致性说明</h1> <p>1、客户端通过随机算法或者域名请求模式选举出Nacos集群中的一个节点，发送服务注册请求（客户端NamingProxy类）</p> <p>2、Nacos集群节点处理客户端的服务注册请求（服务端InstanceControler）</p> <p>3、用一致性算法处理服务注册请求（服务端ServiceManager）</p> <p>4、用DistroConsistencyServiceImpl类注册临时节点</p></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/nacos-guide/basic/04-Nacos的临时实例与持久化实例/第4节.Nacos临时实例与持久化实例.html" class="prev">
+        第4节.Nacos临时实例与持久化实例
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nacos-guide/assets/js/app.66cd9b59.js" defer></script><script src="/nacos-guide/assets/js/2.fd0c06d4.js" defer></script><script src="/nacos-guide/assets/js/15.7bf50d6e.js" defer></script>
+  </body>
+</html>
