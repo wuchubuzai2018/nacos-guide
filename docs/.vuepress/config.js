@@ -1,6 +1,6 @@
 module.exports = {
   title: 'Nacos Guide',
-  description: '微服务核心组件Nacos，值得大家学习和研究',
+  description: '分享微服务组件Nacos，学习其源码与思想',
   locales: {
     '/': {
       lang: 'zh-CN'
@@ -53,6 +53,18 @@ module.exports = {
                             title: "第2节.Nacos启动脚本文件说明",
                             path: "/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.md" ,
                             collapsable: false
+                        },{
+                            title: "第3节.Nacos命名空间说明",
+                            path: "/basic/03-Nacos命名空间说明/第3节.Nacos命名空间说明.md" ,
+                            collapsable: false
+                        },{
+                            title: "第4节.Nacos临时实例与持久化实例",
+                            path: "/basic/04-Nacos的临时实例与持久化实例/第4节.Nacos临时实例与持久化实例.md" ,
+                            collapsable: false
+                        },{
+                            title: "第5节.Nacos注册中心AP模式的数据一致性",
+                            path: "/basic/05-Nacos注册中心AP模式的数据一致性/第5节.Nacos注册中心AP模式的数据一致性.md" ,
+                            collapsable: false
                         }
 
                       ]
@@ -65,7 +77,12 @@ module.exports = {
                         children: [{
                           title: "第1节.Nacos源码开篇及环境搭建",
                            collapsable: true,
-                          path: "/nacos2/第1节.Nacos源码开篇及环境搭建/第1节.Nacos源码开篇及环境搭建.md"                        }
+                          path: "/nacos2/第1节.Nacos源码开篇及环境搭建/第1节.Nacos源码开篇及环境搭建.md"
+                        },{
+                            title: "第2节.Nacos客户端服务注册源码分析",
+                            collapsable: true,
+                            path: "/nacos2/第2节.Nacos客户端服务注册源码分析/第2节.Nacos客户端服务注册源码分析"
+                        }
 
                       ]
                     }
@@ -82,6 +99,19 @@ module.exports = {
                                 title: "第2节.Nacos中的CAS的使用",
                                 collapsable: true,
                                 path: "/design/第2节.Nacos中的CAS的使用.md"
+                            },
+                            {
+                                title: "第3节.Nacos中的生产者消费者多线程模式的使用",
+                                collapsable: true,
+                                path: "/design/第3节.Nacos中的生产者消费者多线程模式的使用.md"
+                            }, {
+                                title: "第4节.Nacos中的优雅的重试请求代码",
+                                collapsable: true,
+                                path: "/design/第4节.Nacos中的优雅的重试请求代码.md"
+                            }, {
+                                title: "第5节.Nacos中委托设计模式的使用",
+                                collapsable: true,
+                                path: "/design/第5节.Nacos中委托设计模式的使用.md"
                             }
 
                         ]
