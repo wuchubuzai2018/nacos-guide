@@ -81,7 +81,11 @@ module.exports = {
                         },{
                             title: "第2节.Nacos客户端服务注册源码分析",
                             collapsable: true,
-                            path: "/nacos2/第2节.Nacos客户端服务注册源码分析/第2节.Nacos客户端服务注册源码分析"
+                            path: "/nacos2/第2节.Nacos客户端服务注册源码分析/第2节.Nacos客户端服务注册源码分析.md"
+                        },{
+                            title: "第3节.Nacos服务端服务注册之基本处理流程",
+                            collapsable: true,
+                            path: "/nacos2/第3节.Nacos服务端服务注册之基本处理1/第3节.Nacos服务端服务注册之基本处理流程.md"
                         }
 
                       ]
@@ -112,6 +116,10 @@ module.exports = {
                                 title: "第5节.Nacos中委托设计模式的使用",
                                 collapsable: true,
                                 path: "/design/第5节.Nacos中委托设计模式的使用.md"
+                            },{
+                                title: "第6节.Nacos中多个子类容器注入冲突问题设计",
+                                collapsable: true,
+                                path: "/design/第6节.Nacos中多个子类容器注入冲突问题设计.md"
                             }
 
                         ]
