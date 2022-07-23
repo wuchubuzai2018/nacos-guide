@@ -28,6 +28,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 
 2、第2节.Nacos客户端服务注册源码分析
 
+3、第3节.Nacos服务端服务注册之基本处理流程
+
 ## 三、Nacos代码设计
 
 1、第1节:Nacos中的Optional的使用
@@ -39,6 +41,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 4、第4节.Nacos中的优雅的重试请求代码
 
 5、第5节.Nacos中委托设计模式的使用
+
+6、第6节.Nacos中多个子类容器注入冲突问题设计
 
 # 项目维护参与
 欢迎感兴趣的小伙伴参与项目的维护。

@@ -16,7 +16,7 @@ module.exports = {
                 text: '基本使用', link: '/basic/'
             },
             { 
-                text: 'Nacos2.x源码分析', link: '/nacos2/'
+                text: 'Nacos2源码分析', link: '/nacos2/'
             },
             {
                 text: 'Nacos代码设计', link: '/design/'
@@ -26,6 +26,9 @@ module.exports = {
             },
              { 
                 text: '关于', link: '/about/'
+            },
+            {
+                text: 'Github', link: 'https://github.com/wuchubuzai2018/nacos-guide'
             }
         ],
         sidebar: {
