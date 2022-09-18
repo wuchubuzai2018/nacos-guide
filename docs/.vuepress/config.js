@@ -68,6 +68,14 @@ module.exports = {
                             title: "第5节.Nacos注册中心AP模式的数据一致性",
                             path: "/basic/05-Nacos注册中心AP模式的数据一致性/第5节.Nacos注册中心AP模式的数据一致性.md" ,
                             collapsable: false
+                        },{
+                            title: "第6节.Nacos的一致性协议Distro说明",
+                            path: "/basic/06-Nacos的一致性协议：Distro协议/第6节.Nacos的一致性协议Distro说明.md" ,
+                            collapsable: false
+                        },{
+                            title: "第7节.Linux环境部署Nacos",
+                            path: "/basic/07-Linux环境部署Nacos/第7节.Linux环境部署Nacos.md" ,
+                            collapsable: false
                         }
 
                       ]
@@ -86,9 +94,13 @@ module.exports = {
                             collapsable: true,
                             path: "/nacos2/第2节.Nacos客户端服务注册源码分析/第2节.Nacos客户端服务注册源码分析.md"
                         },{
-                            title: "第3节.Nacos服务端服务注册之基本处理流程",
+                            title: "第3节.服务端服务注册之基本处理流程",
                             collapsable: true,
                             path: "/nacos2/第3节.Nacos服务端服务注册之基本处理1/第3节.Nacos服务端服务注册之基本处理流程.md"
+                        },{
+                            title: "第4节.服务端服务注册之Distro协议注册与异步复制",
+                            collapsable: true,
+                            path: "/nacos2/第4节.Nacos服务端服务注册之基本处理2/第4节.Nacos服务端服务注册之Distro协议注册与异步复制.md"
                         }
 
                       ]
@@ -123,6 +135,10 @@ module.exports = {
                                 title: "第6节.Nacos中多个子类容器注入冲突问题设计",
                                 collapsable: true,
                                 path: "/design/第6节.Nacos中多个子类容器注入冲突问题设计.md"
+                            },{
+                                title: "第7节.Nacos中Token过期与保护代码设计",
+                                collapsable: true,
+                                path: "/design/第7节.Nacos中Token过期与保护代码设计.md"
                             }
 
                         ]

@@ -22,6 +22,10 @@ https://wuchubuzai2018.github.io/nacos-guide/
 
 5、第5节.Nacos注册中心AP模式的数据一致性
 
+6、第6节.Nacos的一致性协议Distro说明
+
+7、第7节.Linux环境部署Nacos
+
 ##  二、Nacos2.x源码分析
 
 1、第1节.Nacos源码开篇及环境搭建
@@ -29,6 +33,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 2、第2节.Nacos客户端服务注册源码分析
 
 3、第3节.Nacos服务端服务注册之基本处理流程
+
+4、第4节.Nacos服务端服务注册之Distro协议注册与异步复制
 
 ## 三、Nacos代码设计
 
@@ -43,6 +49,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 5、第5节.Nacos中委托设计模式的使用
 
 6、第6节.Nacos中多个子类容器注入冲突问题设计
+
+7、第7节.Nacos中Token过期与保护代码设计
 
 # 项目维护参与
 欢迎感兴趣的小伙伴参与项目的维护。
