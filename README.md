@@ -26,6 +26,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 
 7、第7节.Linux环境部署Nacos
 
+8、第8节.Nacos的端口占用说明
+
 ##  二、Nacos2.x源码分析
 
 1、第1节.Nacos源码开篇及环境搭建
@@ -35,6 +37,10 @@ https://wuchubuzai2018.github.io/nacos-guide/
 3、第3节.Nacos服务端服务注册之基本处理流程
 
 4、第4节.Nacos服务端服务注册之Distro协议注册与异步复制
+
+5、第5节.Nacos中的DistroFilter服务注册路由
+
+6、第6节.Nacos服务端服务健康检查源码分析
 
 ## 三、Nacos代码设计
 
@@ -51,6 +57,18 @@ https://wuchubuzai2018.github.io/nacos-guide/
 6、第6节.Nacos中多个子类容器注入冲突问题设计
 
 7、第7节.Nacos中Token过期与保护代码设计
+
+## 四、Nacos中的设计模式
+
+第1节.Nacos中委派设计模式的使用
+
+第2节.Nacos中模板方法设计模式的使用
+
+第3节.Nacos中的装饰者设计模式的使用
+
+第4节.Nacos中的策略设计模式的使用
+
+第5节.Nacos中建造者设计模式的使用
 
 # 项目维护参与
 欢迎感兴趣的小伙伴参与项目的维护。

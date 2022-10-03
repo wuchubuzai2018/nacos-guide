@@ -21,6 +21,9 @@ module.exports = {
             {
                 text: 'Nacos代码设计', link: '/design/'
             },
+            {
+                text: 'Nacos设计模式', link: '/pattern/'
+            },
             { 
                 text: '常见问题', link: '/question/'
             },
@@ -76,6 +79,10 @@ module.exports = {
                             title: "第7节.Linux环境部署Nacos",
                             path: "/basic/07-Linux环境部署Nacos/第7节.Linux环境部署Nacos.md" ,
                             collapsable: false
+                        },{
+                            title: "第8节.Nacos的端口占用说明",
+                            path: "/basic/08-Nacos的端口占用说明/第8节.Nacos的端口占用说明.md" ,
+                            collapsable: false
                         }
 
                       ]
@@ -101,6 +108,14 @@ module.exports = {
                             title: "第4节.服务端服务注册之Distro协议注册与异步复制",
                             collapsable: true,
                             path: "/nacos2/第4节.Nacos服务端服务注册之基本处理2/第4节.Nacos服务端服务注册之Distro协议注册与异步复制.md"
+                        },{
+                            title: "第5节.Nacos中的DistroFilter服务注册路由",
+                            collapsable: true,
+                            path: "/nacos2/第5节.Nacos中的DistroFilter服务注册路由/第5节.Nacos中的DistroFilter服务注册路由.md"
+                        },{
+                            title: "第6节.Nacos服务端服务健康检查源码分析",
+                            collapsable: true,
+                            path: "/nacos2/第6节.Nacos服务端服务健康检查源码分析/第6节.Nacos服务端服务健康检查源码分析.md"
                         }
 
                       ]
@@ -128,20 +143,43 @@ module.exports = {
                                 collapsable: true,
                                 path: "/design/第4节.Nacos中的优雅的重试请求代码.md"
                             }, {
-                                title: "第5节.Nacos中委托设计模式的使用",
+                                title: "第5节.Nacos中多个子类容器注入冲突问题设计",
                                 collapsable: true,
-                                path: "/design/第5节.Nacos中委托设计模式的使用.md"
+                                path: "/design/第5节.Nacos中多个子类容器注入冲突问题设计.md"
                             },{
-                                title: "第6节.Nacos中多个子类容器注入冲突问题设计",
+                                title: "第6节.Nacos中Token过期与保护代码设计",
                                 collapsable: true,
-                                path: "/design/第6节.Nacos中多个子类容器注入冲突问题设计.md"
-                            },{
-                                title: "第7节.Nacos中Token过期与保护代码设计",
-                                collapsable: true,
-                                path: "/design/第7节.Nacos中Token过期与保护代码设计.md"
+                                path: "/design/第6节.Nacos中Token过期与保护代码设计.md"
                             }
 
                         ]
+                    }
+                ],
+                "/pattern/":[
+                    {
+                        title: 'Nacos设计模式',
+                        collapsable: false, // 不折叠
+                        children: [{
+                            title: "第1节.Nacos中的委派设计模式的使用",
+                            collapsable: true,
+                            path: "/pattern/第1节.Nacos中的委派设计模式的使用.md"
+                        }, {
+                            title: "第2节.Nacos中的模板方法设计模式的使用",
+                            collapsable: true,
+                            path: "/pattern/第2节.Nacos中的模板方法设计模式的使用.md"
+                        }, {
+                            title: "第3节.Nacos中的装饰者设计模式的使用",
+                            collapsable: true,
+                            path: "/pattern/第3节.Nacos中的装饰者设计模式的使用.md"
+                        }, {
+                            title: "第4节.Nacos中的策略设计模式的使用",
+                            collapsable: true,
+                            path: "/pattern/第4节.Nacos中的策略设计模式的使用.md"
+                        },{
+                            title: "第5节.Nacos中建造者设计模式的使用",
+                            collapsable: true,
+                            path: "/pattern/第5节.Nacos中的建造者设计模式的使用.md"
+                        }]
                     }
                 ],
                 "/question/":[
