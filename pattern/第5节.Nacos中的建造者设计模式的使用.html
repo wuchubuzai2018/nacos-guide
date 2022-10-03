@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第5节.Nacos中建造者设计模式的使用 | Nacos Guide</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="分享微服务组件Nacos，学习其源码与思想">
+    
+    <link rel="preload" href="/nacos-guide/assets/css/0.styles.8ec0511f.css" as="style"><link rel="preload" href="/nacos-guide/assets/js/app.58904bbc.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/2.bcb8ada0.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/47.2c838d77.js" as="script"><link rel="prefetch" href="/nacos-guide/assets/js/10.414297eb.js"><link rel="prefetch" href="/nacos-guide/assets/js/11.6924b8be.js"><link rel="prefetch" href="/nacos-guide/assets/js/12.2df7aaf5.js"><link rel="prefetch" href="/nacos-guide/assets/js/13.0411f054.js"><link rel="prefetch" href="/nacos-guide/assets/js/14.2fece716.js"><link rel="prefetch" href="/nacos-guide/assets/js/15.a9af88a3.js"><link rel="prefetch" href="/nacos-guide/assets/js/16.ac6f0f62.js"><link rel="prefetch" href="/nacos-guide/assets/js/17.c9e55614.js"><link rel="prefetch" href="/nacos-guide/assets/js/18.07efd751.js"><link rel="prefetch" href="/nacos-guide/assets/js/19.d1a4fa8c.js"><link rel="prefetch" href="/nacos-guide/assets/js/20.94547e75.js"><link rel="prefetch" href="/nacos-guide/assets/js/21.8bbc968e.js"><link rel="prefetch" href="/nacos-guide/assets/js/22.34426fff.js"><link rel="prefetch" href="/nacos-guide/assets/js/23.f5a0dd50.js"><link rel="prefetch" href="/nacos-guide/assets/js/24.8e6edd5b.js"><link rel="prefetch" href="/nacos-guide/assets/js/25.4205587a.js"><link rel="prefetch" href="/nacos-guide/assets/js/26.54e0dcb1.js"><link rel="prefetch" href="/nacos-guide/assets/js/27.f0b99844.js"><link rel="prefetch" href="/nacos-guide/assets/js/28.d3ff820c.js"><link rel="prefetch" href="/nacos-guide/assets/js/29.1cea8961.js"><link rel="prefetch" href="/nacos-guide/assets/js/3.21236339.js"><link rel="prefetch" href="/nacos-guide/assets/js/30.56bea7be.js"><link rel="prefetch" href="/nacos-guide/assets/js/31.b0a7ef5d.js"><link rel="prefetch" href="/nacos-guide/assets/js/32.0f78403e.js"><link rel="prefetch" href="/nacos-guide/assets/js/33.3e6f607f.js"><link rel="prefetch" href="/nacos-guide/assets/js/34.e7a2db63.js"><link rel="prefetch" href="/nacos-guide/assets/js/35.fcbdc28b.js"><link rel="prefetch" href="/nacos-guide/assets/js/36.1b19578b.js"><link rel="prefetch" href="/nacos-guide/assets/js/37.523f4f68.js"><link rel="prefetch" href="/nacos-guide/assets/js/38.11c91ed1.js"><link rel="prefetch" href="/nacos-guide/assets/js/39.6ae2d483.js"><link rel="prefetch" href="/nacos-guide/assets/js/4.1e55e07a.js"><link rel="prefetch" href="/nacos-guide/assets/js/40.e64072b0.js"><link rel="prefetch" href="/nacos-guide/assets/js/41.d8f71396.js"><link rel="prefetch" href="/nacos-guide/assets/js/42.a36a8c1a.js"><link rel="prefetch" href="/nacos-guide/assets/js/43.2a859251.js"><link rel="prefetch" href="/nacos-guide/assets/js/44.da8dce44.js"><link rel="prefetch" href="/nacos-guide/assets/js/45.b4f19581.js"><link rel="prefetch" href="/nacos-guide/assets/js/46.f77b8d13.js"><link rel="prefetch" href="/nacos-guide/assets/js/48.fe38d9dc.js"><link rel="prefetch" href="/nacos-guide/assets/js/5.86974e91.js"><link rel="prefetch" href="/nacos-guide/assets/js/6.cbe62e54.js"><link rel="prefetch" href="/nacos-guide/assets/js/7.46bb4735.js"><link rel="prefetch" href="/nacos-guide/assets/js/8.d72cc739.js"><link rel="prefetch" href="/nacos-guide/assets/js/9.dbce594a.js">
+    <link rel="stylesheet" href="/nacos-guide/assets/css/0.styles.8ec0511f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nacos-guide/" class="home-link router-link-active"><!----> <span class="site-name">Nacos Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/pattern/" class="nav-link router-link-active">
+  Nacos设计模式
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/wuchubuzai2018/nacos-guide" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/pattern/" class="nav-link router-link-active">
+  Nacos设计模式
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/wuchubuzai2018/nacos-guide" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Nacos设计模式</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/nacos-guide/pattern/第1节.Nacos中的委派设计模式的使用.html" class="sidebar-link">第1节.Nacos中的委派设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第2节.Nacos中的模板方法设计模式的使用.html" class="sidebar-link">第2节.Nacos中的模板方法设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第3节.Nacos中的装饰者设计模式的使用.html" class="sidebar-link">第3节.Nacos中的装饰者设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html" class="sidebar-link">第4节.Nacos中的策略设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html" class="active sidebar-link">第5节.Nacos中建造者设计模式的使用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html#一、建造者模式的定义" class="sidebar-link">一、建造者模式的定义</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html#二、建造模式的使用场景" class="sidebar-link">二、建造模式的使用场景</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html#三、nacos中的使用位置" class="sidebar-link">三、Nacos中的使用位置</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html#_3-1、实例元数据信息构造" class="sidebar-link">3.1、实例元数据信息构造</a></li></ul></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第5节-nacos中建造者设计模式的使用"><a href="#第5节-nacos中建造者设计模式的使用" class="header-anchor">#</a> 第5节.Nacos中建造者设计模式的使用</h1> <h2 id="一、建造者模式的定义"><a href="#一、建造者模式的定义" class="header-anchor">#</a> 一、建造者模式的定义</h2> <p>将一个复杂对象的构建与其表示分离，使得同样的构建过程可以创建不同的表示。</p> <h2 id="二、建造模式的使用场景"><a href="#二、建造模式的使用场景" class="header-anchor">#</a> 二、建造模式的使用场景</h2> <p>当一个类的构造函数参数个数超过4个，而且这些参数有些是可选的参数，考虑使用构造者模式。</p> <p>建造者模式一般是链式调用。</p> <h2 id="三、nacos中的使用位置"><a href="#三、nacos中的使用位置" class="header-anchor">#</a> 三、Nacos中的使用位置</h2> <h3 id="_3-1、实例元数据信息构造"><a href="#_3-1、实例元数据信息构造" class="header-anchor">#</a> 3.1、实例元数据信息构造</h3> <p>nacos中的注册实例的接口，对于接收到的实例信息，采用了InstanceBuilder这个类完成构造，避免这个定义多个构造函数导致的需求变化问题，InstanceBuilder类的使用代码如下所示：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token class-name">String</span> <span class="token function">register</span><span class="token punctuation">(</span><span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>defaultValue <span class="token operator">=</span> <span class="token class-name">Constants</span><span class="token punctuation">.</span>DEFAULT_NAMESPACE_ID<span class="token punctuation">)</span> <span class="token class-name">String</span> namespaceId<span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">String</span> serviceName<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">String</span> ip<span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>defaultValue <span class="token operator">=</span> <span class="token class-name">UtilsAndCommons</span><span class="token punctuation">.</span>DEFAULT_CLUSTER_NAME<span class="token punctuation">)</span> <span class="token class-name">String</span> cluster<span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">Integer</span> port<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>defaultValue <span class="token operator">=</span> <span class="token string">&quot;true&quot;</span><span class="token punctuation">)</span> <span class="token class-name">Boolean</span> healthy<span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>defaultValue <span class="token operator">=</span> <span class="token string">&quot;1&quot;</span><span class="token punctuation">)</span> <span class="token class-name">Double</span> weight<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span><span class="token punctuation">(</span>defaultValue <span class="token operator">=</span> <span class="token string">&quot;true&quot;</span><span class="token punctuation">)</span> <span class="token class-name">Boolean</span> enabled<span class="token punctuation">,</span>
+        <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">String</span> metadata<span class="token punctuation">,</span> <span class="token annotation punctuation">@RequestParam</span> <span class="token class-name">Boolean</span> ephemeral<span class="token punctuation">)</span> <span class="token keyword">throws</span> <span class="token class-name">Exception</span> <span class="token punctuation">{</span>
+    <span class="token comment">// </span>
+    <span class="token class-name">NamingUtils</span><span class="token punctuation">.</span><span class="token function">checkServiceNameFormat</span><span class="token punctuation">(</span>serviceName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">checkWeight</span><span class="token punctuation">(</span>weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  	<span class="token comment">// 使用构造者设计模式建造实例对象</span>
+    <span class="token keyword">final</span> <span class="token class-name">Instance</span> instance <span class="token operator">=</span> <span class="token class-name">InstanceBuilder</span><span class="token punctuation">.</span><span class="token function">newBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setServiceName</span><span class="token punctuation">(</span>serviceName<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setIp</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setClusterName</span><span class="token punctuation">(</span>cluster<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setPort</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setHealthy</span><span class="token punctuation">(</span>healthy<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setWeight</span><span class="token punctuation">(</span>weight<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setEnabled</span><span class="token punctuation">(</span>enabled<span class="token punctuation">)</span>
+            <span class="token punctuation">.</span><span class="token function">setMetadata</span><span class="token punctuation">(</span><span class="token class-name">UtilsAndCommons</span><span class="token punctuation">.</span><span class="token function">parseMetadata</span><span class="token punctuation">(</span>metadata<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setEphemeral</span><span class="token punctuation">(</span>ephemeral<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ephemeral <span class="token operator">==</span> <span class="token keyword">null</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        instance<span class="token punctuation">.</span><span class="token function">setEphemeral</span><span class="token punctuation">(</span><span class="token punctuation">(</span>switchDomain<span class="token punctuation">.</span><span class="token function">isDefaultInstanceEphemeral</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    instanceServiceV2<span class="token punctuation">.</span><span class="token function">registerInstance</span><span class="token punctuation">(</span>namespaceId<span class="token punctuation">,</span> serviceName<span class="token punctuation">,</span> instance<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token string">&quot;ok&quot;</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>其中，InstanceBuilder类的代码如下，并采用了非内部类的方式进行定义：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">InstanceBuilder</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">String</span> instanceId<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">String</span> ip<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">Integer</span> port<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">Double</span> weight<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">Boolean</span> healthy<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">Boolean</span> enabled<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">Boolean</span> ephemeral<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">String</span> clusterName<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">String</span> serviceName<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> metadata <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token class-name">InstanceBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setInstanceId</span><span class="token punctuation">(</span><span class="token class-name">String</span> instanceId<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>instanceId <span class="token operator">=</span> instanceId<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setIp</span><span class="token punctuation">(</span><span class="token class-name">String</span> ip<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ip <span class="token operator">=</span> ip<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setPort</span><span class="token punctuation">(</span><span class="token class-name">Integer</span> port<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>port <span class="token operator">=</span> port<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setWeight</span><span class="token punctuation">(</span><span class="token class-name">Double</span> weight<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>weight <span class="token operator">=</span> weight<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setHealthy</span><span class="token punctuation">(</span><span class="token class-name">Boolean</span> healthy<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>healthy <span class="token operator">=</span> healthy<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setEnabled</span><span class="token punctuation">(</span><span class="token class-name">Boolean</span> enabled<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>enabled <span class="token operator">=</span> enabled<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setEphemeral</span><span class="token punctuation">(</span><span class="token class-name">Boolean</span> ephemeral<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>ephemeral <span class="token operator">=</span> ephemeral<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setClusterName</span><span class="token punctuation">(</span><span class="token class-name">String</span> clusterName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>clusterName <span class="token operator">=</span> clusterName<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setServiceName</span><span class="token punctuation">(</span><span class="token class-name">String</span> serviceName<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>serviceName <span class="token operator">=</span> serviceName<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">setMetadata</span><span class="token punctuation">(</span><span class="token class-name">Map</span><span class="token generics"><span class="token punctuation">&lt;</span><span class="token class-name">String</span><span class="token punctuation">,</span> <span class="token class-name">String</span><span class="token punctuation">&gt;</span></span> metadata<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>metadata <span class="token operator">=</span> metadata<span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">addMetadata</span><span class="token punctuation">(</span><span class="token class-name">String</span> metaKey<span class="token punctuation">,</span> <span class="token class-name">String</span> metaValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>metadata<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>metaKey<span class="token punctuation">,</span> metaValue<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">/**
+     * Build a new {@link Instance}.
+     *
+     * @return new instance
+     */</span>
+    <span class="token keyword">public</span> <span class="token class-name">Instance</span> <span class="token function">build</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token class-name">Instance</span> result <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Instance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>instanceId<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setInstanceId</span><span class="token punctuation">(</span>instanceId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setIp</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setPort</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>weight<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setWeight</span><span class="token punctuation">(</span>weight<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>healthy<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setHealthy</span><span class="token punctuation">(</span>healthy<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>enabled<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setEnabled</span><span class="token punctuation">(</span>enabled<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>ephemeral<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setEphemeral</span><span class="token punctuation">(</span>ephemeral<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>clusterName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setClusterName</span><span class="token punctuation">(</span>clusterName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token class-name">Objects</span><span class="token punctuation">.</span><span class="token function">isNull</span><span class="token punctuation">(</span>serviceName<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            result<span class="token punctuation">.</span><span class="token function">setServiceName</span><span class="token punctuation">(</span>serviceName<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        result<span class="token punctuation">.</span><span class="token function">setMetadata</span><span class="token punctuation">(</span>metadata<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> result<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token class-name">InstanceBuilder</span> <span class="token function">newBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">InstanceBuilder</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>通过这个方法，可以看到将对象的构造过程封装为了单独的builder类。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">10/3/2022, 5:50:00 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html" class="prev">
+        第4节.Nacos中的策略设计模式的使用
+      </a></span> <!----></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nacos-guide/assets/js/app.58904bbc.js" defer></script><script src="/nacos-guide/assets/js/2.bcb8ada0.js" defer></script><script src="/nacos-guide/assets/js/47.2c838d77.js" defer></script>
+  </body>
+</html>

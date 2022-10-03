@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第7节.Linux环境部署Nacos | Nacos Guide</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="分享微服务组件Nacos，学习其源码与思想">
+    
+    <link rel="preload" href="/nacos-guide/assets/css/0.styles.8ec0511f.css" as="style"><link rel="preload" href="/nacos-guide/assets/js/app.58904bbc.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/2.bcb8ada0.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/17.c9e55614.js" as="script"><link rel="prefetch" href="/nacos-guide/assets/js/10.414297eb.js"><link rel="prefetch" href="/nacos-guide/assets/js/11.6924b8be.js"><link rel="prefetch" href="/nacos-guide/assets/js/12.2df7aaf5.js"><link rel="prefetch" href="/nacos-guide/assets/js/13.0411f054.js"><link rel="prefetch" href="/nacos-guide/assets/js/14.2fece716.js"><link rel="prefetch" href="/nacos-guide/assets/js/15.a9af88a3.js"><link rel="prefetch" href="/nacos-guide/assets/js/16.ac6f0f62.js"><link rel="prefetch" href="/nacos-guide/assets/js/18.07efd751.js"><link rel="prefetch" href="/nacos-guide/assets/js/19.d1a4fa8c.js"><link rel="prefetch" href="/nacos-guide/assets/js/20.94547e75.js"><link rel="prefetch" href="/nacos-guide/assets/js/21.8bbc968e.js"><link rel="prefetch" href="/nacos-guide/assets/js/22.34426fff.js"><link rel="prefetch" href="/nacos-guide/assets/js/23.f5a0dd50.js"><link rel="prefetch" href="/nacos-guide/assets/js/24.8e6edd5b.js"><link rel="prefetch" href="/nacos-guide/assets/js/25.4205587a.js"><link rel="prefetch" href="/nacos-guide/assets/js/26.54e0dcb1.js"><link rel="prefetch" href="/nacos-guide/assets/js/27.f0b99844.js"><link rel="prefetch" href="/nacos-guide/assets/js/28.d3ff820c.js"><link rel="prefetch" href="/nacos-guide/assets/js/29.1cea8961.js"><link rel="prefetch" href="/nacos-guide/assets/js/3.21236339.js"><link rel="prefetch" href="/nacos-guide/assets/js/30.56bea7be.js"><link rel="prefetch" href="/nacos-guide/assets/js/31.b0a7ef5d.js"><link rel="prefetch" href="/nacos-guide/assets/js/32.0f78403e.js"><link rel="prefetch" href="/nacos-guide/assets/js/33.3e6f607f.js"><link rel="prefetch" href="/nacos-guide/assets/js/34.e7a2db63.js"><link rel="prefetch" href="/nacos-guide/assets/js/35.fcbdc28b.js"><link rel="prefetch" href="/nacos-guide/assets/js/36.1b19578b.js"><link rel="prefetch" href="/nacos-guide/assets/js/37.523f4f68.js"><link rel="prefetch" href="/nacos-guide/assets/js/38.11c91ed1.js"><link rel="prefetch" href="/nacos-guide/assets/js/39.6ae2d483.js"><link rel="prefetch" href="/nacos-guide/assets/js/4.1e55e07a.js"><link rel="prefetch" href="/nacos-guide/assets/js/40.e64072b0.js"><link rel="prefetch" href="/nacos-guide/assets/js/41.d8f71396.js"><link rel="prefetch" href="/nacos-guide/assets/js/42.a36a8c1a.js"><link rel="prefetch" href="/nacos-guide/assets/js/43.2a859251.js"><link rel="prefetch" href="/nacos-guide/assets/js/44.da8dce44.js"><link rel="prefetch" href="/nacos-guide/assets/js/45.b4f19581.js"><link rel="prefetch" href="/nacos-guide/assets/js/46.f77b8d13.js"><link rel="prefetch" href="/nacos-guide/assets/js/47.2c838d77.js"><link rel="prefetch" href="/nacos-guide/assets/js/48.fe38d9dc.js"><link rel="prefetch" href="/nacos-guide/assets/js/5.86974e91.js"><link rel="prefetch" href="/nacos-guide/assets/js/6.cbe62e54.js"><link rel="prefetch" href="/nacos-guide/assets/js/7.46bb4735.js"><link rel="prefetch" href="/nacos-guide/assets/js/8.d72cc739.js"><link rel="prefetch" href="/nacos-guide/assets/js/9.dbce594a.js">
+    <link rel="stylesheet" href="/nacos-guide/assets/css/0.styles.8ec0511f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nacos-guide/" class="home-link router-link-active"><!----> <span class="site-name">Nacos Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/pattern/" class="nav-link">
+  Nacos设计模式
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/wuchubuzai2018/nacos-guide" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link router-link-active">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/pattern/" class="nav-link">
+  Nacos设计模式
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/wuchubuzai2018/nacos-guide" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>基本使用</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/nacos-guide/basic/01-Nacos表结构说明/第1节.Nacos数据库表结构说明.html" class="sidebar-link">第1节.Nacos数据库表结构说明</a></li><li><a href="/nacos-guide/basic/02-Nacos启动脚本文件说明/第2节.Nacos启动脚本文件说明.html" class="sidebar-link">第2节.Nacos启动脚本文件说明</a></li><li><a href="/nacos-guide/basic/03-Nacos命名空间说明/第3节.Nacos命名空间说明.html" class="sidebar-link">第3节.Nacos命名空间说明</a></li><li><a href="/nacos-guide/basic/04-Nacos的临时实例与持久化实例/第4节.Nacos临时实例与持久化实例.html" class="sidebar-link">第4节.Nacos临时实例与持久化实例</a></li><li><a href="/nacos-guide/basic/05-Nacos注册中心AP模式的数据一致性/第5节.Nacos注册中心AP模式的数据一致性.html" class="sidebar-link">第5节.Nacos注册中心AP模式的数据一致性</a></li><li><a href="/nacos-guide/basic/06-Nacos的一致性协议：Distro协议/第6节.Nacos的一致性协议Distro说明.html" class="sidebar-link">第6节.Nacos的一致性协议Distro说明</a></li><li><a href="/nacos-guide/basic/07-Linux环境部署Nacos/第7节.Linux环境部署Nacos.html" class="active sidebar-link">第7节.Linux环境部署Nacos</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nacos-guide/basic/07-Linux环境部署Nacos/第7节.Linux环境部署Nacos.html#一、安装java" class="sidebar-link">一、安装Java</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/basic/07-Linux环境部署Nacos/第7节.Linux环境部署Nacos.html#二、集群部署" class="sidebar-link">二、集群部署</a></li></ul></li><li><a href="/nacos-guide/basic/08-Nacos的端口占用说明/第8节.Nacos的端口占用说明.html" class="sidebar-link">第8节.Nacos的端口占用说明</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第7节-linux环境部署nacos"><a href="#第7节-linux环境部署nacos" class="header-anchor">#</a> 第7节.Linux环境部署Nacos</h1> <h2 id="一、安装java"><a href="#一、安装java" class="header-anchor">#</a> 一、安装Java</h2> <p>将jdk1.8的安装包上传到/opt/app下，并解压重命名为jdk1.8。</p> <p>然后在/etc/profile文件中，增加如下环境变量：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token assign-left variable">JAVA_HOME</span><span class="token operator">=</span>/opt/app/jdk1.8
+<span class="token assign-left variable"><span class="token environment constant">PATH</span></span><span class="token operator">=</span><span class="token environment constant">$PATH</span><span class="token builtin class-name">:</span><span class="token variable">$JAVA_HOME</span>/bin
+<span class="token assign-left variable">CLASSPATH</span><span class="token operator">=</span>.:<span class="token variable">$JAVA_HOME</span>/lib/tools.jar:<span class="token variable">$JAVA_HOME</span>/lib/dt.jar
+<span class="token builtin class-name">export</span> JAVA_HOME
+<span class="token builtin class-name">export</span> <span class="token environment constant">PATH</span>
+<span class="token builtin class-name">export</span> CLASSPATH
+</code></pre></div><p>保存退出后，执行source /etc/profile生效。</p> <h2 id="二、集群部署"><a href="#二、集群部署" class="header-anchor">#</a> 二、集群部署</h2> <p>准备3台服务器，并进行规划，这里安装时将服务器的防火墙暂时关闭，也可以将三台服务器之前的网络设置为可信任的。</p> <p>1、在每台节点上，将Nacos2.1的部署包上传到每台服务器的/opt/app目录下，解压并重命名为nacos2.1。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token function">tar</span> -zxvf nacos2.1.tar.gz
+</code></pre></div><p>2、在每台节点上，修改配置文件，将外部的数据库配置信息增加到nacos安装目录下的conf文件夹下的application.properties文件中。</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token comment">#*************** Config Module Related Configurations ***************#</span>
+<span class="token comment">### If use MySQL as datasource:</span>
+spring.datasource.platform<span class="token operator">=</span>mysql
+<span class="token comment">### Count of DB:</span>
+db.num<span class="token operator">=</span><span class="token number">1</span>
+<span class="token comment">### Connect URL of DB:</span>
+db.url.0<span class="token operator">=</span>jdbc:mysql://127.0.0.1:3306/nacos?characterEncoding<span class="token operator">=</span>utf8<span class="token operator">&amp;</span><span class="token assign-left variable">connectTimeout</span><span class="token operator">=</span><span class="token number">1000</span><span class="token operator">&amp;</span><span class="token assign-left variable">socketTimeout</span><span class="token operator">=</span><span class="token number">3000</span><span class="token operator">&amp;</span><span class="token assign-left variable">autoReconnect</span><span class="token operator">=</span>true<span class="token operator">&amp;</span><span class="token assign-left variable">useUnicode</span><span class="token operator">=</span>true<span class="token operator">&amp;</span><span class="token assign-left variable">useSSL</span><span class="token operator">=</span>false<span class="token operator">&amp;</span><span class="token assign-left variable">serverTimezone</span><span class="token operator">=</span>UTC<span class="token operator">&amp;</span><span class="token assign-left variable">allowPublicKeyRetrieval</span><span class="token operator">=</span>true
+db.user.0<span class="token operator">=</span>nacos
+db.password.0<span class="token operator">=</span>nacos
+</code></pre></div><p>3、在每台节点上，修改Nacos启动文件的中的默认JVM参数，默认的JVM参数过大，根据自己的机器配置情况进行修改，在nacos根目录/bin/startup.sh文件中调整JVM参数，大概在文件的93行左右：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${MODE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;standalone&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+      <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Xms512m -Xmx512m -Xmn256m&quot;</span>
+         <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -Dnacos.standalone=true&quot;</span>
+      <span class="token keyword">else</span>
+         <span class="token keyword">if</span> <span class="token punctuation">[</span><span class="token punctuation">[</span> <span class="token string">&quot;<span class="token variable">${EMBEDDED_STORAGE}</span>&quot;</span> <span class="token operator">==</span> <span class="token string">&quot;embedded&quot;</span> <span class="token punctuation">]</span><span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token keyword">then</span>
+              <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -DembeddedStorage=true&quot;</span>
+          <span class="token keyword">fi</span>
+          <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -server -Xms2G -Xmx2g -Xmn1g -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m&quot;</span>
+          <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -XX:-OmitStackTraceInFastThrow -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=<span class="token variable">${BASE_DIR}</span>/logs/java_heapdump.hprof&quot;</span>
+         <span class="token assign-left variable">JAVA_OPT</span><span class="token operator">=</span><span class="token string">&quot;<span class="token variable">${JAVA_OPT}</span> -XX:-UseLargePages&quot;</span>
+     <span class="token keyword">fi</span>
+</code></pre></div><p>4、在每台节点上，配置集群文件，编辑nacos安装目录下的cluster.conf文件，增加集群节点：</p> <div class="language-shell extra-class"><pre class="language-shell"><code><span class="token builtin class-name">cd</span> nacos主目录
+<span class="token function">cp</span> cluster.conf.example cluster.conf
+<span class="token function">vi</span> cluster.conf
+</code></pre></div><p>增加类似如下IP地址：</p> <p>192.168.1.2:8848
+192.168.1.3:8848
+192.168.1.4:8848</p> <p>nacos启动后会占用当前端口、当前端口+1000、当前端口+1001、当前端口-1000。</p> <p>5、在每台节点上，分别执行启动命令：</p> <p>cd nacos主目录
+bin/startup.sh</p> <p>6、浏览器访问验证一下即可</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">9/18/2022, 10:03:39 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/nacos-guide/basic/06-Nacos的一致性协议：Distro协议/第6节.Nacos的一致性协议Distro说明.html" class="prev">
+        第6节.Nacos的一致性协议Distro说明
+      </a></span> <span class="next"><a href="/nacos-guide/basic/08-Nacos的端口占用说明/第8节.Nacos的端口占用说明.html">
+        第8节.Nacos的端口占用说明
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nacos-guide/assets/js/app.58904bbc.js" defer></script><script src="/nacos-guide/assets/js/2.bcb8ada0.js" defer></script><script src="/nacos-guide/assets/js/17.c9e55614.js" defer></script>
+  </body>
+</html>

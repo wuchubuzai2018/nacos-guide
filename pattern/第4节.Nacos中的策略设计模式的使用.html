@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>第4节.Nacos中策略设计模式的使用 | Nacos Guide</title>
+    <meta name="generator" content="VuePress 1.9.7">
+    
+    <meta name="description" content="分享微服务组件Nacos，学习其源码与思想">
+    
+    <link rel="preload" href="/nacos-guide/assets/css/0.styles.8ec0511f.css" as="style"><link rel="preload" href="/nacos-guide/assets/js/app.58904bbc.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/2.bcb8ada0.js" as="script"><link rel="preload" href="/nacos-guide/assets/js/46.f77b8d13.js" as="script"><link rel="prefetch" href="/nacos-guide/assets/js/10.414297eb.js"><link rel="prefetch" href="/nacos-guide/assets/js/11.6924b8be.js"><link rel="prefetch" href="/nacos-guide/assets/js/12.2df7aaf5.js"><link rel="prefetch" href="/nacos-guide/assets/js/13.0411f054.js"><link rel="prefetch" href="/nacos-guide/assets/js/14.2fece716.js"><link rel="prefetch" href="/nacos-guide/assets/js/15.a9af88a3.js"><link rel="prefetch" href="/nacos-guide/assets/js/16.ac6f0f62.js"><link rel="prefetch" href="/nacos-guide/assets/js/17.c9e55614.js"><link rel="prefetch" href="/nacos-guide/assets/js/18.07efd751.js"><link rel="prefetch" href="/nacos-guide/assets/js/19.d1a4fa8c.js"><link rel="prefetch" href="/nacos-guide/assets/js/20.94547e75.js"><link rel="prefetch" href="/nacos-guide/assets/js/21.8bbc968e.js"><link rel="prefetch" href="/nacos-guide/assets/js/22.34426fff.js"><link rel="prefetch" href="/nacos-guide/assets/js/23.f5a0dd50.js"><link rel="prefetch" href="/nacos-guide/assets/js/24.8e6edd5b.js"><link rel="prefetch" href="/nacos-guide/assets/js/25.4205587a.js"><link rel="prefetch" href="/nacos-guide/assets/js/26.54e0dcb1.js"><link rel="prefetch" href="/nacos-guide/assets/js/27.f0b99844.js"><link rel="prefetch" href="/nacos-guide/assets/js/28.d3ff820c.js"><link rel="prefetch" href="/nacos-guide/assets/js/29.1cea8961.js"><link rel="prefetch" href="/nacos-guide/assets/js/3.21236339.js"><link rel="prefetch" href="/nacos-guide/assets/js/30.56bea7be.js"><link rel="prefetch" href="/nacos-guide/assets/js/31.b0a7ef5d.js"><link rel="prefetch" href="/nacos-guide/assets/js/32.0f78403e.js"><link rel="prefetch" href="/nacos-guide/assets/js/33.3e6f607f.js"><link rel="prefetch" href="/nacos-guide/assets/js/34.e7a2db63.js"><link rel="prefetch" href="/nacos-guide/assets/js/35.fcbdc28b.js"><link rel="prefetch" href="/nacos-guide/assets/js/36.1b19578b.js"><link rel="prefetch" href="/nacos-guide/assets/js/37.523f4f68.js"><link rel="prefetch" href="/nacos-guide/assets/js/38.11c91ed1.js"><link rel="prefetch" href="/nacos-guide/assets/js/39.6ae2d483.js"><link rel="prefetch" href="/nacos-guide/assets/js/4.1e55e07a.js"><link rel="prefetch" href="/nacos-guide/assets/js/40.e64072b0.js"><link rel="prefetch" href="/nacos-guide/assets/js/41.d8f71396.js"><link rel="prefetch" href="/nacos-guide/assets/js/42.a36a8c1a.js"><link rel="prefetch" href="/nacos-guide/assets/js/43.2a859251.js"><link rel="prefetch" href="/nacos-guide/assets/js/44.da8dce44.js"><link rel="prefetch" href="/nacos-guide/assets/js/45.b4f19581.js"><link rel="prefetch" href="/nacos-guide/assets/js/47.2c838d77.js"><link rel="prefetch" href="/nacos-guide/assets/js/48.fe38d9dc.js"><link rel="prefetch" href="/nacos-guide/assets/js/5.86974e91.js"><link rel="prefetch" href="/nacos-guide/assets/js/6.cbe62e54.js"><link rel="prefetch" href="/nacos-guide/assets/js/7.46bb4735.js"><link rel="prefetch" href="/nacos-guide/assets/js/8.d72cc739.js"><link rel="prefetch" href="/nacos-guide/assets/js/9.dbce594a.js">
+    <link rel="stylesheet" href="/nacos-guide/assets/css/0.styles.8ec0511f.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/nacos-guide/" class="home-link router-link-active"><!----> <span class="site-name">Nacos Guide</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/pattern/" class="nav-link router-link-active">
+  Nacos设计模式
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/wuchubuzai2018/nacos-guide" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/nacos-guide/guide/list/01.html" class="nav-link">
+  导读
+</a></div><div class="nav-item"><a href="/nacos-guide/basic/" class="nav-link">
+  基本使用
+</a></div><div class="nav-item"><a href="/nacos-guide/nacos2/" class="nav-link">
+  Nacos2源码分析
+</a></div><div class="nav-item"><a href="/nacos-guide/design/" class="nav-link">
+  Nacos代码设计
+</a></div><div class="nav-item"><a href="/nacos-guide/pattern/" class="nav-link router-link-active">
+  Nacos设计模式
+</a></div><div class="nav-item"><a href="/nacos-guide/question/" class="nav-link">
+  常见问题
+</a></div><div class="nav-item"><a href="/nacos-guide/about/" class="nav-link">
+  关于
+</a></div><div class="nav-item"><a href="https://github.com/wuchubuzai2018/nacos-guide" target="_blank" rel="noopener noreferrer" class="nav-link external">
+  Github
+  <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Nacos设计模式</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/nacos-guide/pattern/第1节.Nacos中的委派设计模式的使用.html" class="sidebar-link">第1节.Nacos中的委派设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第2节.Nacos中的模板方法设计模式的使用.html" class="sidebar-link">第2节.Nacos中的模板方法设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第3节.Nacos中的装饰者设计模式的使用.html" class="sidebar-link">第3节.Nacos中的装饰者设计模式的使用</a></li><li><a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html" class="active sidebar-link">第4节.Nacos中的策略设计模式的使用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html#一、策略模式的定义" class="sidebar-link">一、策略模式的定义</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html#二、策略模式的使用场景" class="sidebar-link">二、策略模式的使用场景</a></li><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html#三、nacos中的使用" class="sidebar-link">三、Nacos中的使用</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/nacos-guide/pattern/第4节.Nacos中的策略设计模式的使用.html#_3-1、distro协议组件维护对象相关distrocomponentholder" class="sidebar-link">3.1、Distro协议组件维护对象相关DistroComponentHolder</a></li></ul></li></ul></li><li><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html" class="sidebar-link">第5节.Nacos中建造者设计模式的使用</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="第4节-nacos中策略设计模式的使用"><a href="#第4节-nacos中策略设计模式的使用" class="header-anchor">#</a> 第4节.Nacos中策略设计模式的使用</h1> <h2 id="一、策略模式的定义"><a href="#一、策略模式的定义" class="header-anchor">#</a> 一、策略模式的定义</h2> <p>策略模式属于行为型模式,是使用最多的设计模式之一，策略模式定义了算法族，分别封装起来，让它们之间可以互相替换，此模式让算法的变化独立于使用算法的客户。</p> <h2 id="二、策略模式的使用场景"><a href="#二、策略模式的使用场景" class="header-anchor">#</a> 二、策略模式的使用场景</h2> <p>策略设计模式一般使用的场景是，多种可<strong>互相替代</strong>的同类行为，在具体的运行过程中根据不同的情况，选择其中一种行为来执行。</p> <h2 id="三、nacos中的使用"><a href="#三、nacos中的使用" class="header-anchor">#</a> 三、Nacos中的使用</h2> <h3 id="_3-1、distro协议组件维护对象相关distrocomponentholder"><a href="#_3-1、distro协议组件维护对象相关distrocomponentholder" class="header-anchor">#</a> 3.1、Distro协议组件维护对象相关DistroComponentHolder</h3> <p>在Nacos中，Distro协议的处理包括了：</p> <p>存储：DataStorage</p> <p>请求传输代理：TransportAgent</p> <p>任务失败处理器：TaskFailedHandler</p> <p>数据一致性服务：ConsistencyService</p> <p>可以参考DistroHttpRegistry(1.x)类和DistroClientComponentRegistry(2.x)的注册设计，在这两个类中，对于如上几点的处理，分别注册了对应的处理策略，以DistroTransportAgent这个传输请求代理为例，该接口定义了请求的基本方法，</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">DistroTransportAgent</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">boolean</span> <span class="token function">supportCallbackTransport</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">boolean</span> <span class="token function">syncData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> data<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">void</span> <span class="token function">syncData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> data<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">,</span> <span class="token class-name">DistroCallback</span> callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">boolean</span> <span class="token function">syncVerifyData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> verifyData<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token keyword">void</span> <span class="token function">syncVerifyData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> verifyData<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">,</span> <span class="token class-name">DistroCallback</span> callback<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token class-name">DistroData</span> <span class="token function">getData</span><span class="token punctuation">(</span><span class="token class-name">DistroKey</span> key<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    <span class="token class-name">DistroData</span> <span class="token function">getDatumSnapshot</span><span class="token punctuation">(</span><span class="token class-name">String</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>其中HTTP的请求方式代码如下：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DistroHttpAgent</span> <span class="token keyword">implements</span> <span class="token class-name">DistroTransportAgent</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">ServerMemberManager</span> memberManager<span class="token punctuation">;</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">DistroHttpAgent</span><span class="token punctuation">(</span><span class="token class-name">ServerMemberManager</span> memberManager<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>memberManager <span class="token operator">=</span> memberManager<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">supportCallbackTransport</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">syncData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> data<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>memberManager<span class="token punctuation">.</span><span class="token function">hasMember</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">byte</span><span class="token punctuation">[</span><span class="token punctuation">]</span> dataContent <span class="token operator">=</span> data<span class="token punctuation">.</span><span class="token function">getContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token class-name">NamingProxy</span><span class="token punctuation">.</span><span class="token function">syncData</span><span class="token punctuation">(</span>dataContent<span class="token punctuation">,</span> data<span class="token punctuation">.</span><span class="token function">getDistroKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getTargetServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">syncData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> data<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">,</span> <span class="token class-name">DistroCallback</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UnsupportedOperationException</span><span class="token punctuation">(</span><span class="token string">&quot;Http distro agent do not support this method&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">syncVerifyData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> verifyData<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>memberManager<span class="token punctuation">.</span><span class="token function">hasMember</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">NamingProxy</span><span class="token punctuation">.</span><span class="token function">syncCheckSums</span><span class="token punctuation">(</span>verifyData<span class="token punctuation">.</span><span class="token function">getContent</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">syncVerifyData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> verifyData<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">,</span> <span class="token class-name">DistroCallback</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">throw</span> <span class="token keyword">new</span> <span class="token class-name">UnsupportedOperationException</span><span class="token punctuation">(</span><span class="token string">&quot;Http distro agent do not support this method&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment">//.....省略部分代码</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>对于Grpc的方式核心代码如下：</p> <div class="language-java extra-class"><pre class="language-java"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">DistroClientTransportAgent</span> <span class="token keyword">implements</span> <span class="token class-name">DistroTransportAgent</span> <span class="token punctuation">{</span>
+    
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">ClusterRpcClientProxy</span> clusterRpcClientProxy<span class="token punctuation">;</span>
+    
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token class-name">ServerMemberManager</span> memberManager<span class="token punctuation">;</span>
+    
+    <span class="token keyword">public</span> <span class="token class-name">DistroClientTransportAgent</span><span class="token punctuation">(</span><span class="token class-name">ClusterRpcClientProxy</span> clusterRpcClientProxy<span class="token punctuation">,</span>
+            <span class="token class-name">ServerMemberManager</span> serverMemberManager<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>clusterRpcClientProxy <span class="token operator">=</span> clusterRpcClientProxy<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>memberManager <span class="token operator">=</span> serverMemberManager<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">supportCallbackTransport</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">syncData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> data<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNoExistTarget</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">DistroDataRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DistroDataRequest</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> data<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Member</span> member <span class="token operator">=</span> memberManager<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkTargetServerStatusUnhealthy</span><span class="token punctuation">(</span>member<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Loggers</span><span class="token punctuation">.</span>DISTRO<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">&quot;[DISTRO] Cancel distro sync caused by target server {} unhealthy&quot;</span><span class="token punctuation">,</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Response</span> response <span class="token operator">=</span> clusterRpcClientProxy<span class="token punctuation">.</span><span class="token function">sendRequest</span><span class="token punctuation">(</span>member<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token function">checkResponse</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NacosException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Loggers</span><span class="token punctuation">.</span>DISTRO<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">&quot;[DISTRO-FAILED] Sync distro data failed! &quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">syncData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> data<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">,</span> <span class="token class-name">DistroCallback</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNoExistTarget</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            callback<span class="token punctuation">.</span><span class="token function">onSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">DistroDataRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DistroDataRequest</span><span class="token punctuation">(</span>data<span class="token punctuation">,</span> data<span class="token punctuation">.</span><span class="token function">getType</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Member</span> member <span class="token operator">=</span> memberManager<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            clusterRpcClientProxy<span class="token punctuation">.</span><span class="token function">asyncRequest</span><span class="token punctuation">(</span>member<span class="token punctuation">,</span> request<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">DistroRpcCallbackWrapper</span><span class="token punctuation">(</span>callback<span class="token punctuation">,</span> member<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NacosException</span> nacosException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            callback<span class="token punctuation">.</span><span class="token function">onFailed</span><span class="token punctuation">(</span>nacosException<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">syncVerifyData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> verifyData<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNoExistTarget</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// replace target server as self server so that can callback.</span>
+        verifyData<span class="token punctuation">.</span><span class="token function">getDistroKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">setTargetServer</span><span class="token punctuation">(</span>memberManager<span class="token punctuation">.</span><span class="token function">getSelf</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getAddress</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">DistroDataRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DistroDataRequest</span><span class="token punctuation">(</span>verifyData<span class="token punctuation">,</span> <span class="token class-name">DataOperation</span><span class="token punctuation">.</span>VERIFY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Member</span> member <span class="token operator">=</span> memberManager<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">checkTargetServerStatusUnhealthy</span><span class="token punctuation">(</span>member<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Loggers</span><span class="token punctuation">.</span>DISTRO<span class="token punctuation">.</span><span class="token function">warn</span><span class="token punctuation">(</span><span class="token string">&quot;[DISTRO] Cancel distro verify caused by target server {} unhealthy&quot;</span><span class="token punctuation">,</span> targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Response</span> response <span class="token operator">=</span> clusterRpcClientProxy<span class="token punctuation">.</span><span class="token function">sendRequest</span><span class="token punctuation">(</span>member<span class="token punctuation">,</span> request<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token function">checkResponse</span><span class="token punctuation">(</span>response<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NacosException</span> e<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token class-name">Loggers</span><span class="token punctuation">.</span>DISTRO<span class="token punctuation">.</span><span class="token function">error</span><span class="token punctuation">(</span><span class="token string">&quot;[DISTRO-FAILED] Verify distro data failed! &quot;</span><span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token annotation punctuation">@Override</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">syncVerifyData</span><span class="token punctuation">(</span><span class="token class-name">DistroData</span> verifyData<span class="token punctuation">,</span> <span class="token class-name">String</span> targetServer<span class="token punctuation">,</span> <span class="token class-name">DistroCallback</span> callback<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">isNoExistTarget</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            callback<span class="token punctuation">.</span><span class="token function">onSuccess</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token class-name">DistroDataRequest</span> request <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DistroDataRequest</span><span class="token punctuation">(</span>verifyData<span class="token punctuation">,</span> <span class="token class-name">DataOperation</span><span class="token punctuation">.</span>VERIFY<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">Member</span> member <span class="token operator">=</span> memberManager<span class="token punctuation">.</span><span class="token function">find</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+            <span class="token class-name">DistroVerifyCallbackWrapper</span> wrapper <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">DistroVerifyCallbackWrapper</span><span class="token punctuation">(</span>targetServer<span class="token punctuation">,</span>
+                    verifyData<span class="token punctuation">.</span><span class="token function">getDistroKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">getResourceKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> callback<span class="token punctuation">,</span> member<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            clusterRpcClientProxy<span class="token punctuation">.</span><span class="token function">asyncRequest</span><span class="token punctuation">(</span>member<span class="token punctuation">,</span> request<span class="token punctuation">,</span> wrapper<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">NacosException</span> nacosException<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            callback<span class="token punctuation">.</span><span class="token function">onFailed</span><span class="token punctuation">(</span>nacosException<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+		<span class="token comment">//.....省略部分代码</span>
+    
+<span class="token punctuation">}</span>    
+</code></pre></div><p>当以上不同的策略定义好以后，Registry类将该实现类注册到DistroComponentHolder类中的Map对象了，并在使用的时候，根据不同的类型，进行了对象的读取，实现了不同策略的选择。</p> <p>在 Distro 协议的设计思想下，每个 Distro 节点都可以接收到读写请求。所有的 Distro 协议的请求场景主要分为三种情况：</p> <p>1、当该节点接收到属于该节点负责的实例的写请求时，直接写入。</p> <p>2、当该节点接收到不属于该节点负责的实例的写请求时，将在集群内部路由，转发给对应的节点，从而完成读写。</p> <p>3、当该节点接收到任何读请求时，都直接在本机查询并返回（因为所有实例都被同步到了每台机器上）。</p></div> <footer class="page-edit"><!----> <div class="last-updated"><span class="prefix">Last Updated:</span> <span class="time">10/3/2022, 5:50:00 PM</span></div></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/nacos-guide/pattern/第3节.Nacos中的装饰者设计模式的使用.html" class="prev">
+        第3节.Nacos中的装饰者设计模式的使用
+      </a></span> <span class="next"><a href="/nacos-guide/pattern/第5节.Nacos中的建造者设计模式的使用.html">
+        第5节.Nacos中建造者设计模式的使用
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/nacos-guide/assets/js/app.58904bbc.js" defer></script><script src="/nacos-guide/assets/js/2.bcb8ada0.js" defer></script><script src="/nacos-guide/assets/js/46.f77b8d13.js" defer></script>
+  </body>
+</html>
