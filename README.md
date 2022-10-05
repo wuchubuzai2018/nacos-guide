@@ -28,6 +28,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 
 8、第8节.Nacos的端口占用说明
 
+9、第9节.Nacos中的健康检查说明
+
 ##  二、Nacos2.x源码分析
 
 1、第1节.Nacos源码开篇及环境搭建
@@ -52,11 +54,11 @@ https://wuchubuzai2018.github.io/nacos-guide/
 
 4、第4节.Nacos中的优雅的重试请求代码
 
-5、第5节.Nacos中委托设计模式的使用
+5、第5节.Nacos中多个子类容器注入冲突问题设计
 
-6、第6节.Nacos中多个子类容器注入冲突问题设计
+6、第6节.Nacos中Token过期与保护代码设计
 
-7、第7节.Nacos中Token过期与保护代码设计
+7、第7节.Nacos中的SPI扩展加载代码设计
 
 ## 四、Nacos中的设计模式
 
@@ -69,6 +71,8 @@ https://wuchubuzai2018.github.io/nacos-guide/
 第4节.Nacos中的策略设计模式的使用
 
 第5节.Nacos中建造者设计模式的使用
+
+第6节.Nacos中的观察者设计模式的使用
 
 # 项目维护参与
 欢迎感兴趣的小伙伴参与项目的维护。

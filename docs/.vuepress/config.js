@@ -83,6 +83,10 @@ module.exports = {
                             title: "第8节.Nacos的端口占用说明",
                             path: "/basic/08-Nacos的端口占用说明/第8节.Nacos的端口占用说明.md" ,
                             collapsable: false
+                        },{
+                            title: "第9节.Nacos中的健康检查说明",
+                            path: "/basic/09-Nacos中的健康检查说明/第9节.Nacos中的健康检查说明.md" ,
+                            collapsable: false
                         }
 
                       ]
@@ -150,6 +154,10 @@ module.exports = {
                                 title: "第6节.Nacos中Token过期与保护代码设计",
                                 collapsable: true,
                                 path: "/design/第6节.Nacos中Token过期与保护代码设计.md"
+                            },{
+                                title: "第7节.Nacos中的SPI扩展加载代码设计",
+                                collapsable: true,
+                                path: "/design/第7节.Nacos中的SPI扩展加载代码设计.md"
                             }
 
                         ]
@@ -179,6 +187,10 @@ module.exports = {
                             title: "第5节.Nacos中建造者设计模式的使用",
                             collapsable: true,
                             path: "/pattern/第5节.Nacos中的建造者设计模式的使用.md"
+                        },{
+                            title: "第6节.Nacos中的观察者设计模式的使用",
+                            collapsable: true,
+                            path: "/pattern/第6节.Nacos中的观察者设计模式的使用.md"
                         }]
                     }
                 ],
